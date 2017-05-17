@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="template">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personality Tweet Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  </head>
+  <body ng-controller="MainCtrl">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 ng-bind="title"></h1>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          We try to get personality insight out of tweets
+          <br>
+          <br>
+        </div>
+      </div>
+
+  <div class="row">
+        <div class="col-xs-6">
+          <form id="my-twitter-id-form">
+            Twitter ID @ <input type="text" id="my-twitter-id-field" value="{{myTwitterId}}">
+              .   # of twits:
+             <input type="number" id="my-twits-number-field" value="{{myTweetsNum}}">
+             <p id="my-twitter-field-response"></p>
+          </form><br>
+          <form id="celeb-twitter-id-form">
+            Twitter ID @ <input type="text" id="cel-twitter-id-field" value="{{celTwitterId}}">
+               .  # of twits:
+             <input type="number" id="cel-twits-number-field" value="{{celTweetsNum}}">
+             <p id="cel-twitter-field-response"></p>
+          </form><br>
+        </div>
+  </div>
+  <div class="row">
+        <div class="col-xs-2">
+            <button class="btn btn-primary" ng-click="getTweets()">Get Tweets</button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-success" ng-click="getMyInsight()">Insight for {{myName}}</button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-success" ng-click="getCelInsight()">Insight for {{celName}}</button>
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-success" ng-click="drawChart()">Celebrity Match</button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="twits-1"></div>
+        </div>
+        <div class="col-xs-12">
+          <div id="twits-2"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <h3>There are {{myTweets.length}} tweets of {{myName}} obtained</h3>
+          <table class="table table-striped table-bordered table-hover table-condenced">
+            <thead>
+              <th>Date</th>
+              <th>Tweet</th>
+              <!--<th>Tweet</th>-->
+            </thead>
+            <tbody ng-repeat="tweet in myTweets track by $index">
+              <td ng-bind="tweet.created_at"></td>
+              <td ng-bind="tweet.text"></td>
+              <!--<td>{{tweet.TWEET}}</td>-->
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xs-6">
+          <h3>There are {{celTweets.length}} tweets of {{celName}} obtained</h3>
+          <table class="table table-striped table-bordered table-hover table-condenced">
+            <thead>
+              <th>Date</th>
+              <th>Tweet</th>
+              <!--<th>Tweet</th>-->
+            </thead>
+            <tbody ng-repeat="tweet in celTweets track by $index">
+              <td ng-bind="tweet.created_at"></td>
+              <td ng-bind="tweet.text"></td>
+              <!--<td>{{tweet.TWEET}}</td>-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="/vendor/lodash.min.js"></script>
+    <script src="/vendor/moment-with-locales.min.js"></script>
+    <script src="/vendor/highcharts.js"></script>
+    <script src="/vendor/webcam.js"></script>
+    <script src="/vendor/recorder.js"></script>
+    <script src="/vendor/utilities.js"></script>
+    <script src="/index.js"></script>
+  </body>
+</html>
