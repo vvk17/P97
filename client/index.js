@@ -1,5 +1,6 @@
 /* global angular, nodered, express, openwhisk */
 
+
 Highcharts.setOptions({
  colors: ['#ffb3ff', '#000', '#2d862d', '#ac7339']
 });
@@ -19,7 +20,8 @@ angular.module('template', [])
    $scope.celName = "...";
    $scope.myText = "";
    $scope.celText = "";
-   $scope.chocolateSentiment = 0;
+   $scope.myInsights;
+   $scope.celInsights;
 
    $scope.getIds = function () {
 
@@ -74,7 +76,7 @@ angular.module('template', [])
           for (var i = 0; i < $scope.myTweets.length; i++) {
             $scope.myText += $scope.myTweets[i].text+" ";
           }
-          console.log("myText : "+$scope.myText);
+ //         console.log("myText : "+$scope.myText);
 
       });
 
@@ -95,10 +97,49 @@ angular.module('template', [])
           for (var i = 0; i < $scope.celTweets.length; i++) {
             $scope.celText += $scope.celTweets[i].text+" ";
           }
-          console.log("celText : "+$scope.celText);
+  //        console.log("celText : "+$scope.celText);
       });
 
     }
+
+    $scope.getMyInsights = function() {
+
+        var params = {
+          recaptcha: "ok",
+          text: $scope.myText,
+          language: 'en'
+        };
+
+      $http.post('/api/myprofile',params).then(function(response) {
+        $scope.myInsights = response.data;
+        console.log($scope.myInsights);
+        });
+
+   //     console.log("myinsights:"+$scope.myInsights);
+      }
+
+
+      $scope.getCelInsights = function() {
+
+        var params = {
+          recaptcha: "ok",
+          text: $scope.celText,
+          language: 'en'
+        };
+
+      $http.post('/api/celprofile',params).then(function(response) {
+        $scope.celInsights = response.data;
+ //       console.log($scope.celInsights);
+        });
+
+ //       console.log("celInsights : "+JSON.stringify($scope.celInsights));
+      }
+
+    $scope.logInsights = function() {
+      console.log($scope.myInsights);
+      console.log($scope.celInsights);
+    }
+
 
 
 

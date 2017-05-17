@@ -9,6 +9,13 @@ var OpenWhisk = require('openwhisk');
 
 var Twitter = require('twitter');
 
+var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
+
+var watson = require('watson-developer-cloud');
+
+var extend = require('util')._extend;
+var i18n = require('i18next');
+
 var app = express();
 var storage = multer.memoryStorage();
 var uploadr = multer({storage: storage});
@@ -17,6 +24,12 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//i18n settings
+//require('../config/i18n')(app);
+
+// Bootstrap application settings
+//require('../config/express')(app);
 
 app.listen(process.env.PORT, process.env.IP, function(){
   console.log('[LISTENING] - port:', process.env.PORT, 'ip:', process.env.IP);
@@ -92,3 +105,34 @@ var client = new Twitter ({
   })
 */
 });
+
+
+var personalityInsights = watson.personality_insights({
+  version: 'v2',
+  username: '002b8c93-6fdd-43a3-89a4-78960dff5301',
+  password: '5gM5O1n6Fyis'
+});
+
+
+app.post('/api/myprofile', function(req, res, next) {
+  var parameters = extend(req.body, { acceptLanguage : 'en' });
+
+  console.log("parameters : "+JSON.stringify(parameters));
+
+  personalityInsights.profile(parameters, function(err, profile) {
+      res.send(profile);
+  });
+});
+
+app.post('/api/celprofile', function(req, res, next) {
+  var parameters = extend(req.body, { acceptLanguage : 'en' });
+
+  //console.log("parameters : "+JSON.stringify(parameters));
+
+  personalityInsights.profile(parameters, function(err, profile) {
+      return res.json(profile);
+  });
+});
+
+
+
