@@ -46,18 +46,18 @@
             <button class="btn btn-primary" ng-click="getTweets()">Get Tweets</button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-success" ng-click="getMyInsights()">Insight for {{myName}}</button>
+          <button class="btn btn-success" ng-click="showMyInsights()">Insight for {{myName}}</button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-success" ng-click="getCelInsights()">Insight for {{celName}}</button>
+          <button class="btn btn-success" ng-click="showCelInsights()">Insight for {{celName}}</button>
         </div>
         <div class="col-xs-2">
-          <button class="btn btn-success" ng-click="logInsights()">Celebrity Match</button>
+          <button class="btn btn-success" ng-click="showMyCelMatch()">Celebrity Match</button>
         </div>
       </div>
 
 
-      <div class="row">
+      <div class="row" ng-show="showTweets">
         <div class="col-xs-12">
           <div id="twits-1"></div>
         </div>
@@ -66,9 +66,9 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" ng-show="showTweets">
         <div class="col-xs-6">
-          <h3>There are {{myTweets.length}} tweets of {{myName}} obtained</h3>
+          <h3>{{myName}} : {{myTweets.length}} tweets</h3>
           <table class="table table-striped table-bordered table-hover table-condenced">
             <thead>
               <th>Date</th>
@@ -83,7 +83,7 @@
           </table>
         </div>
         <div class="col-xs-6">
-          <h3>There are {{celTweets.length}} tweets of {{celName}} obtained</h3>
+          <h3>{{celName}} : {{celTweets.length}} tweets</h3>
           <table class="table table-striped table-bordered table-hover table-condenced">
             <thead>
               <th>Date</th>
@@ -98,6 +98,25 @@
           </table>
         </div>
       </div>
+      <div class="results" ng-show="showInsights">
+        <div class="row">
+          <div class="col-xs-4">
+            <h4>{{chartName}} - Data Behind Personality</h4>
+            <div id="traits" ></div>
+          </div>
+          <div class="col-xs-8">
+            <h4>Visualization of Personality Data</h4>
+            <div id="vizcontainer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="results" ng-show="showMatch">
+        <div class="row">
+          <div class="col-xs-8">
+            <h3>{{myName}} match to {{celName}}</h3>
+            <div id="celmatch" ></div>
+          </div>
+      </div>
 
     </div>
 
@@ -111,5 +130,13 @@
     <script src="/vendor/recorder.js"></script>
     <script src="/vendor/utilities.js"></script>
     <script src="/index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"></script>
+<!--    <script src="/public/js/demo.js"></script> -->
+    <script src="/public/js/personality.js"></script>
+    <script src="/public/js/string-utils.js"></script>
+    <script src="/public/js/i18n.js"></script>
+    <script src="/public/js/textsummary.js"></script>
   </body>
 </html>

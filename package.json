@@ -17,11 +17,14 @@
     "node-uuid": "^1.4.7",
     "openwhisk": "^1.0.1",
     "request": "^2.69.0",
+    "require": "^2.4.20",
     "twilio": "^2.9.1",
+    "twitter": "^1.7.0",
     "watson-developer-cloud": "^2.31.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "twitter": "^1.7.0"
   }
 }

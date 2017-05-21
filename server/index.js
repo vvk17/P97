@@ -14,7 +14,7 @@ var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights
 var watson = require('watson-developer-cloud');
 
 var extend = require('util')._extend;
-var i18n = require('i18next');
+//var i18n = require('i18next');
 
 var app = express();
 var storage = multer.memoryStorage();
@@ -67,7 +67,7 @@ app.get('/hello', function(req, res){
 
 app.get('/tweets', function(req, res){
 
-        console.log("req: "+JSON.stringify(req.query));
+ //       console.log("req: "+JSON.stringify(req.query));
 
 var client = new Twitter ({
         consumer_key: 'HwhwHpy4WyOWigCmObQE5DWVU',
@@ -76,12 +76,6 @@ var client = new Twitter ({
         access_token_secret: 'hesbvKtV6aoaj9nMUh4SNTiqZbYxdnroPwjjxFoKOCk38'
       });
 
- /*     var params = {
-        screen_name: 'V12345Valery',
-        count: 5,
-        include_rts: false
-      };
-*/
         var params = req.query;
   //     $http.get('/tweets').then(function(response) {
 
@@ -91,19 +85,12 @@ var client = new Twitter ({
           console.log("OK: got tweets...");
         }
         else {
-          console.log("Error: " + error);
+          console.log("Error: " + JSON.stringify(error));
         }
 
         res.send(tweets);
 
       });
-/*
-  request('http://bluemixphuc1.mybluemix.net/coffeetweets', function(error, response, body) {
-    console.log("error:", error);
-    console.log("status:", response.statusCode);
-    res.send(body);
-  })
-*/
 });
 
 
@@ -117,7 +104,7 @@ var personalityInsights = watson.personality_insights({
 app.post('/api/myprofile', function(req, res, next) {
   var parameters = extend(req.body, { acceptLanguage : 'en' });
 
-  console.log("parameters : "+JSON.stringify(parameters));
+//  console.log("parameters : "+JSON.stringify(parameters));
 
   personalityInsights.profile(parameters, function(err, profile) {
       res.send(profile);

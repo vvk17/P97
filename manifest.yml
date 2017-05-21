@@ -1,6 +1,6 @@
 applications:
 - disk_quota: 1024M
-  host: P97-GetTweets-JS
+  host: P97-Tweets
   name: P97-GetTweets-JS
   path: .
   domain: mybluemix.net
